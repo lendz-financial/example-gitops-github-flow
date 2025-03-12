@@ -67,7 +67,7 @@ jobs:
       - name: Rollout
         id: rollout
         uses: bytebase/rollout-action@v1
-        if: ${{ steps.create_plan.outputs.deployment_required == 'true' }}
+        if: ${{ steps.create_plan.outputs.deployment-required == 'true' }}
         with:
           url: ${{ env.BYTEBASE_URL }}
           token: ${{ steps.login.outputs.token }}
@@ -84,7 +84,7 @@ jobs:
     env:
       BYTEBASE_URL: https://demo.bytebase.com
       BYTEBASE_SERVICE_ACCOUNT: ci@service.bytebase.com
-    if: ${{ needs.deploy_to_test.outputs.deployment_required == 'true' }}
+    if: ${{ needs.deploy_to_test.outputs.deployment-required == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
