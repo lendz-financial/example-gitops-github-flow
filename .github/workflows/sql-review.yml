@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "migrations/*.sql"      
+      - "migrations/*.sql"
 
 jobs:
   check_release_on_test:
