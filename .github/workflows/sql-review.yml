@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "migrations/*.sql"      
 
 jobs:
   check_release_on_test:
