@@ -66,13 +66,13 @@ jobs:
           check-plan: "SKIP"
       - name: Rollout
         id: rollout
-        uses: bytebase/rollout-action@v1
+        uses: bytebase/rollout-action@v2
         if: ${{ steps.create-plan.outputs.deployment-required == 'true' }}
         with:
           url: ${{ env.BYTEBASE_URL }}
           token: ${{ steps.login.outputs.token }}
           plan: ${{ steps.create-plan.outputs.plan }}
-          target-stage: test # the environment resource id.
+          target-stage: environments/test # the stage environment.
       - name: Deploy app
         run: |
           echo "Deploying app to test environment..."
@@ -97,12 +97,12 @@ jobs:
           service-secret: ${{secrets.BYTEBASE_SERVICE_ACCOUNT_SECRET}} # Please use secrets for sensitive data in production.
       - name: Rollout
         id: rollout
-        uses: bytebase/rollout-action@v1
+        uses: bytebase/rollout-action@v2
         with:
           url: ${{ env.BYTEBASE_URL }}
           token: ${{ steps.login.outputs.token }}
           plan: ${{ needs.deploy-to-test.outputs.bytebase-plan }}
-          target-stage: prod # the environment resource id.
+          target-stage: environments/prod # the stage environment.
       - name: Deploy app
         run: |
           echo "Deploying app to prod environment..."
