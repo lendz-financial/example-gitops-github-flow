@@ -31,11 +31,11 @@ jobs:
       - name: rollout
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BYTEBASE_URL: https://demo.bytebase.com
-          BYTEBASE_SERVICE_ACCOUNT: api@service.bytebase.com
+          BYTEBASE_URL: https://bytebase.gentlesmoke-14a20906.eastus.azurecontainerapps.io
+          BYTEBASE_SERVICE_ACCOUNT: lendz-svc@service.bytebase.com
           BYTEBASE_SERVICE_ACCOUNT_SECRET: ${{secrets.BYTEBASE_SERVICE_ACCOUNT_SECRET}}
-          BYTEBASE_PROJECT: "projects/hr"
-          BYTEBASE_TARGETS: "instances/test-sample-instance/databases/hr_test,instances/prod-sample-instance/databases/hr_prod"
+          BYTEBASE_PROJECT: "lendz-proj-1"
+          BYTEBASE_TARGETS: "instances/lexi-dev"
           BYTEBASE_TARGET_STAGE: environments/test
           FILE_PATTERN: "migrations-semver/*.sql"
           BYTEBASE_OUTPUT: ${{ runner.temp }}/bytebase-metadata.json
@@ -62,10 +62,10 @@ jobs:
       - name: rollout
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BYTEBASE_URL: https://demo.bytebase.com
-          BYTEBASE_SERVICE_ACCOUNT: api@service.bytebase.com
+          BYTEBASE_URL: https://bytebase.gentlesmoke-14a20906.eastus.azurecontainerapps.io
+          BYTEBASE_SERVICE_ACCOUNT: lendz-svc@service.bytebase.com
           BYTEBASE_SERVICE_ACCOUNT_SECRET: ${{secrets.BYTEBASE_SERVICE_ACCOUNT_SECRET}}
-          BYTEBASE_PROJECT: "projects/hr"
+          BYTEBASE_PROJECT: "lendz-proj-1"
           BYTEBASE_TARGET_STAGE: environments/prod
         run: |
           bytebase-action rollout --url=${{ env.BYTEBASE_URL }} --service-account=${{ env.BYTEBASE_SERVICE_ACCOUNT }} --service-account-secret=${{ env.BYTEBASE_SERVICE_ACCOUNT_SECRET }} --project=${{ env.BYTEBASE_PROJECT }} --target-stage=${{ env.BYTEBASE_TARGET_STAGE }}  --plan=${{ needs.deploy-to-test.outputs.bytebase-plan }}
